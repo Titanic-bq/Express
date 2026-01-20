@@ -28,4 +28,20 @@ router.get("/:id", (req, res) => {
   }
 });
 
+// Create new post
+router.post("/", (req, res) => {
+  const newPost = {
+    id: posts.length + 1,
+    title: req.body.title,
+  };
+
+  if (!newPost.title) {
+    return res.status(400).json({ error: "Title is required" });
+  } else {
+    posts.push(newPost);
+  }
+
+  res.status(201).json({ message: "Post created" });
+});
+
 module.exports = router;

@@ -5,6 +5,10 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
+// Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // static
 // app.use(express.static(path.join(__dirname, "public")));
 

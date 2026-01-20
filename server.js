@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send({ message: "Hello, World!" });
+  res.sendFile(__dirname, "public", "index.html");
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(__dirname, "public", "about.html");
 });
 
 app.listen(8000, () => {

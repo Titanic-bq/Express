@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const express = require("express");
 const path = require("node:path");
 const PORT = process.env.PORT || 8000;
@@ -14,16 +15,23 @@ let posts = [
 //All
 app.get("/api/posts", (req, res) => {
   const limit = parseInt(req.query.limit);
+
   if (!isNaN(limit) && limit > 0) {
-    res.json(posts.slice(0, limit));
+    res.status(200).json(posts.slice(0, limit));
   } else {
-    res.json(posts);
+    res.status(200).json(posts);
   }
 });
 //Single
 app.get("/api/posts/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((p) => p.id === id);
+
+  if (!post) {
+    return res.status(404).json({ error: "Post with id not found" });
+  } else {
+    res.status(200).json(post);
+  }
 });
 
 app.listen(PORT, () => {

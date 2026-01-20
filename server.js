@@ -4,6 +4,12 @@ const posts = require("./routes/posts");
 const logger = require("./middleware/logger");
 const errorHandler = require("./middleware/error");
 const PORT = process.env.PORT;
+const { fileURLToPath } = require("url");
+
+// Get directory name
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -14,8 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 //Logger middleware
 app.use(logger);
 
-// static
-// app.use(express.static(path.join(__dirname, "public")));
+// static folder
+app.use(express.static(path.join(__dirname, "public")));
 
 // Rotes
 

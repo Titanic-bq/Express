@@ -6,8 +6,15 @@ let posts = [
   { id: 2, title: "Second Post" },
 ];
 
+const logger = (req, res, next) => {
+  console.log(
+    `${req.method} ${req.protocol}://${req.get("host")}${req.originalUrl}`,
+  );
+  next();
+};
+
 //All
-router.get("/", (req, res) => {
+router.get("/", logger, (req, res) => {
   const limit = parseInt(req.query.limit);
 
   if (!isNaN(limit) && limit > 0) {

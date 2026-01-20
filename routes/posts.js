@@ -43,5 +43,16 @@ router.post("/", (req, res) => {
 
   res.status(201).json({ message: "Post created" });
 });
+// Update post
+router.put("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
 
+  if (!post) {
+    return res.status(404).json({ msg: "Post with id of ${id} not found" });
+  }
+
+  post.title = req.body.title;
+  res.status(200).json(posts);
+});
 module.exports = router;

@@ -2,7 +2,8 @@ const express = require("express");
 const path = require("path");
 const posts = require("./routes/posts");
 const logger = require("./middleware/logger");
-const PORT = process.env.PORT || 8000;
+const errorHandler = require("./middleware/error");
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(logger);
 // Rotes
 
 app.use("/api/posts", posts);
+
+// Error handler
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

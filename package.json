@@ -4,6 +4,7 @@
     "dev": "node --watch server"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "express": "^5.2.1"
   }
 }
